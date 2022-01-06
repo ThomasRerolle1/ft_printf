@@ -1,7 +1,9 @@
 NAME = libftprintf.a
 
-SRCS = ft_printf.c ft_putnbr_unsigned_base.c ft_putnbr_unsigned_fd.c ft_putsize_t_fd.c 
+SRCS = ft_printf.c
+
 LIBFTPATH = ./libft
+
 
 
 
