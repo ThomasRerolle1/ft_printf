@@ -1,10 +1,8 @@
 NAME = libftprintf.a
 
 SRCS = ft_printf.c ft_putnbr_unsigned_base.c ft_putnbr_unsigned_fd.c ft_putsize_t_fd.c 
+LIBFTPATH = ./libft
 
-LIBFT = /Users/trerolle/Desktop/libft/libft.a
-
-OBJS = ${SRCS:.c=.o}
 
 
 CC		= gcc
@@ -12,20 +10,21 @@ RM		= rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
-.c.o:
-		${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
+OBJS = ${SRCS:.c=.o}
 
 $(NAME): ${OBJS}
-		make --silent -C ${LIBFT}
-		ar rcs ${NAME} ${OBJS} ${LIBFT}
+		@$(MAKE) -C $(LIBFTPATH)
+		@cp $(LIBFTPATH)/libft.a $(NAME)
+		@ar rcs ${NAME} ${OBJS}
 
 all:	${NAME}
 
 clean:
-		${RM} ${OBJS} ${OBJSBONUS}
+		@${RM} ${OBJS}
 
 fclean:	clean
-		${RM} ${NAME}
+		@$(MAKE) -C $(LIBFTPATH) fclean
+		@${RM} ${NAME}
 
 re:		fclean all
 

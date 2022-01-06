@@ -6,7 +6,7 @@
 /*   By: trerolle <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 17:09:07 by trerolle          #+#    #+#             */
-/*   Updated: 2021/12/04 14:03:07 by trerolle         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:28:35 by trerolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "/Users/trerolle/Desktop/libft/libft.h"
@@ -15,6 +15,7 @@
 void	ft_putnbr_unsigned_base(unsigned nbr, char *base);
 void	ft_putnbr_unsigned_fd(int n, int fd);
 void	ft_putnbr_size_t_base(size_t nbr, char *base);
+
 void	conversions(char c, va_list values)
 {
 	

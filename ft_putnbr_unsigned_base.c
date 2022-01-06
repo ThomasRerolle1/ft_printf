@@ -6,7 +6,7 @@
 /*   By: trerolle <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:00:34 by trerolle          #+#    #+#             */
-/*   Updated: 2021/12/04 14:03:09 by trerolle         ###   ########.fr       */
+/*   Updated: 2022/01/06 18:52:50 by trerolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "/Users/trerolle/Desktop/libft/libft.h"
@@ -42,7 +42,7 @@ unsigned	check(char *base, unsigned size_base)
 	}
 	return (1);
 }
-
+//maybe can be generalise to tue 'u' case by replacing base by va_arg
 void	ft_putnbr_unsigned_base(unsigned nbr, char *base)
 {
 	unsigned	size_base;
