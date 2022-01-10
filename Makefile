@@ -1,9 +1,10 @@
 NAME = libftprintf.a
 
-SRCS = ft_printf.c
-
-LIBFTPATH = ./libft
-
+SRCS = ft_printf.c \
+	   ft_putchar_fd.c \
+	   ft_putnbr_fd.c \
+	   ft_putsize_t_fd.c \
+	   ft_putstr_fd.c
 
 
 
@@ -15,8 +16,6 @@ CFLAGS = -Wall -Wextra -Werror
 OBJS = ${SRCS:.c=.o}
 
 $(NAME): ${OBJS}
-		@$(MAKE) -C $(LIBFTPATH)
-		@cp $(LIBFTPATH)/libft.a $(NAME)
 		@ar rcs ${NAME} ${OBJS}
 
 all:	${NAME}
@@ -25,7 +24,6 @@ clean:
 		@${RM} ${OBJS}
 
 fclean:	clean
-		@$(MAKE) -C $(LIBFTPATH) fclean
 		@${RM} ${NAME}
 
 re:		fclean all

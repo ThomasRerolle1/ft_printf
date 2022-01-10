@@ -6,34 +6,35 @@
 /*   By: trerolle <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 17:09:07 by trerolle          #+#    #+#             */
-/*   Updated: 2022/01/06 19:40:55 by trerolle         ###   ########.fr       */
+/*   Updated: 2022/01/07 19:36:12 by trerolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft/libft.h"
+#include "ft_printf.h"
 
 
-void	ft_putnbr_size_t_base(size_t nbr, char *base);
 
-void	conversions(char c, va_list values)
+void	conversions(char c, va_list values, int *strlength)
 {
 	
 	if (c == 'c')
- 		ft_putchar_fd(va_arg(values, int), 1);
+ 		ft_putchar_fd(va_arg(values, int), 1, strlength);
 	if (c == 's')
-		ft_putstr_fd(va_arg(values, char *), 1);
-	if (c == 'i' && c == 'd')
-		ft_putnbr_fd(va_arg(values, int), 1);
+		ft_putstr_fd(va_arg(values, char *), 1, strlength);
+	if (c == 'i' || c == 'd')
+		ft_putnbr_fd(va_arg(values, int), 1, strlength);
 	if (c == '%')
-		ft_putchar_fd('%', 1);
+		ft_putchar_fd('%', 1, strlength);
 	if (c == 'u')
-		ft_putnbr_unsigned_fd(va_arg(values, unsigned), 1);
+		ft_putsize_t_base(va_arg(values, unsigned), "0123456789", strlength);
 	if (c == 'x')
-		ft_putnbr_unsigned_base(va_arg(values, unsigned), "0123456789abcdef");
+		ft_putsize_t_base(va_arg(values, unsigned), "0123456789abcdef", strlength);
 	if (c == 'X')
-		ft_putnbr_unsigned_base(va_arg(values, unsigned), "0123456789ABCDEF");
+		ft_putsize_t_base(va_arg(values, unsigned), "0123456789ABCDEF", strlength);
 	if (c == 'p')
-		ft_putstr_fd("0x", 1);
-		ft_putnbr_size_t_base(va_arg(values, size_t), "0123456789abcdef");
+	{
+		ft_putstr_fd("0x", 1, strlength);
+		ft_putsize_t_base(va_arg(values, size_t), "0123456789abcdef", strlength);
+	}
 
 }
 
@@ -43,30 +44,47 @@ int	ft_printf(const char *s, ...)
 {
 	va_list	values;
 	int		i;
+	int		*strlength;
 
+	strlength = malloc(sizeof(int));
+	*strlength = 0;
 	i = 0;
 	va_start(values, s);
 	while (s[i])
 	{
 		if (s[i] == '%' && s[i + 1] != '\0')
 		{
-			conversions(s[i + 1], values);
+			conversions(s[i + 1], values, strlength);
 			i++;
 		}
 		else
+		{
+			*strlength += 1;
 			write(1, &s[i], 1);
+		}
 		i++;
 	}
+	//printf("%i\n", *strlength);
 	va_end(values);
-	return (0);
+	i = *strlength;
+	free(strlength);
+	return (i);
 }
-
+/*
 int	main()
 {
 	char	*p = "hello";
-	ft_printf("%p\n", (size_t)&p);
+	ft_printf("%p\n",(size_t) &p);
 	printf("%p\n", &p);
+	int 	i = -214748647;
+	ft_printf("%i\n", i);
+	printf("%d\n", i);
+	unsigned long 	u = 4294967296;
+	ft_printf("%c\n", 'a');
+	printf("%lu\n", u);
+
+
 
 	return (0);
 }
-
+*/
