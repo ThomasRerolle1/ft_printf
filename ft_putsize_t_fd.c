@@ -6,13 +6,13 @@
 /*   By: trerolle <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:49:11 by trerolle          #+#    #+#             */
-/*   Updated: 2022/01/07 18:42:30 by trerolle         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:02:38 by trerolle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_size_base_t(char *base)
+size_t	ft_size_base(char *base)
 {
 	size_t	i;
 
@@ -22,20 +22,18 @@ size_t	ft_size_base_t(char *base)
 	return (i);
 }
 
-
-
-void	ft_putsize_t_base(size_t nbr, char *base, int *strlength)
+void	ft_putsize_t_base(size_t nbr, char *base, int *strlen)
 {
 	size_t	size_base;
 
-	size_base = ft_size_base_t(base);
+	size_base = ft_size_base(base);
 	if (nbr >= size_base)
 	{
-		ft_putsize_t_base(nbr / size_base, base, strlength);
+		ft_putsize_t_base(nbr / size_base, base, strlen);
 	}
 	if (nbr >= 0)
+	{
 		write(1, &base[nbr % size_base], 1);
-		*strlength += 1;
-		//printf("%i\n", *strlength);
+		*strlen += 1;
+	}
 }
-
